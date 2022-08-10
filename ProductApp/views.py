@@ -121,3 +121,16 @@ def delete_product(request):
         return Response(data ="you are successfully deleted obj")
     else:
         return Response(data ="you are data is not already exist")  
+        
+
+@api_view(["POST"])
+def delete_product(request):
+    data = request.data
+    if Product.objects.all().filter(variety = data["variety"]).exists():
+        Product.objects.all().filter(variety = data["variety"]).delete()
+        return Response(data ="you are successfully deleted obj")
+    else:
+        return Response(data ="you are data is not already exist")  
+ 
+
+        return Response(data ="you are data is not already exist")  
