@@ -150,6 +150,20 @@ def delete_product_group(request):
         return Response(data ="you are successfully deleted obj")
     else:
         return Response(data ="you are data is not already exist")
+        
+        
+        
+@api_view(["POST"])
+def save_product_group(request):
+    data =request.data
+    print(data)
+    if ProductGroup.objects.filter(type = data["type"]).exists():
+        result = "this product group is already existed"
+    else:
+        ProductGroup.objects.create(type=data["type"])
+        result = f"{data} is successfuly created"
+
+    return Response(data = result)
 
 
   
