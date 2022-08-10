@@ -136,7 +136,20 @@ def delete_product_group(request):
         return Response(data ="you are successfully deleted obj")
     else:
         return Response(data ="you are data is not already exist")
+        
+        
+        
+# delete view 
 
- 
+@api_view(["POST"])
+def delete_product_group(request):
+    data = request.data
+    if ProductGroup.objects.all().filter(type = data["type"]).exists():
+        ProductGroup.objects.all().filter(type = data["type"]).delete()
+        Product.objects.all().filter(productgroup = data["type"]).delete()
+        return Response(data ="you are successfully deleted obj")
+    else:
+        return Response(data ="you are data is not already exist")
 
-        return Response(data ="you are data is not already exist")  
+
+  
