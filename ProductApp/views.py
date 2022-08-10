@@ -164,6 +164,19 @@ def save_product_group(request):
         result = f"{data} is successfuly created"
 
     return Response(data = result)
+    
+    
+    
+    @api_view(["POST"])
+def save_product_group(request):
+    data =request.data
+    print(data)
+    if ProductGroup.objects.filter(type = data["type"]).exists():
+        result = "this product group is already existed"
+    else:
+        ProductGroup.objects.create(type=data["type"])
+        result = f"{data} is successfuly created"
+
 
 
   
